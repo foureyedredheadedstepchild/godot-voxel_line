@@ -24,3 +24,5 @@ node.voxel_line(start, end, width, Color.CYAN)
 ## TODO:
 
 - Materials.
+- Editor options / settings.
+- Multimesh.
