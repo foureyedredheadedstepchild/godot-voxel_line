@@ -10,15 +10,6 @@ var voxels : Array = []
 var pool : Array = []
 var pool_index : int = 0
 
-@export var update : bool = false:
-	set(p_value):
-		update = p_value
-		_update_inspector()
-	get:
-		return update
-func _update_inspector():
-	notify_property_list_changed()
-
 @export var points : PackedVector3Array = [
 	Vector3(0, 0, 0),
 	Vector3(0, 8, 16) 
