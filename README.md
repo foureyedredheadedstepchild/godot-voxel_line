@@ -1,8 +1,8 @@
-# godot-voxel_line
+# godot-voxel_line <a href="/addons/voxel_line/voxel_line.png?raw=true"><img width=24 src="/addons/voxel_line/voxel_line.png"></a> 
 A Simple plugin for creating voxel lines. (WIP)
 
 
-<a href="Screenshot 2023-04-11 123609.png?raw=true"><img width=900 src="Screenshot 2023-04-11 123609.png"></a>
+<a href="Screenshot 2023-04-11 123609.png?raw=true"><img width=1024 src="Screenshot 2023-04-11 123609.png"></a>
 
 ## Example:
 
