@@ -19,7 +19,7 @@ node.voxel_line(start, end, width, Color.CYAN)
 
 ```
 
-<a href="Screenshot 2023-04-09 124043.png?raw=true"><img width=900 src="Screenshot 2023-04-09 124043.png"></a>
+<a href="Screenshot 2023-04-11 123609.png?raw=true"><img width=900 src="Screenshot 2023-04-11 123609.png"></a>
 
 ## TODO:
 
