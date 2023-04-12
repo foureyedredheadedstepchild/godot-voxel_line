@@ -34,7 +34,7 @@ var material : Resource = preload("voxel.material") as Material
 
 func _ready():
 	var global_origin : Vector3 = get_global_transform().origin
-	set_multimesh_instance(global_origin, 0, size, color)
+	set_multi_mesh(global_origin, 0, size, color)
 	_update()
 
 func _update() -> void:
@@ -48,7 +48,7 @@ func _update() -> void:
 			var end : Vector3 = points[i + 1] + global_origin
 			voxel_line(start, end, size, color)
 
-func set_multimesh_instance(p_origin : Vector3, p_instance_count : int, p_size : float, p_color : Color) -> void:
+func set_multi_mesh(p_origin : Vector3, p_instance_count : int, p_size : float, p_color : Color) -> void:
 	if (multi_mesh):
 		return
 	multi_mesh = MultiMesh.new()
