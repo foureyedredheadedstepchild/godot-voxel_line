@@ -14,7 +14,6 @@ var material : Resource = preload("voxel.material") as Material
 	set(p_value):
 		points = p_value
 		_update()
-		notify_property_list_changed()
 	get:
 		return points
 
