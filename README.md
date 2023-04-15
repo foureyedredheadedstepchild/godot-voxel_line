@@ -3,6 +3,7 @@ A Simple plugin for creating voxel lines. (WIP)
 
 
 <a href="Screenshot 2023-04-12 000817.png?raw=true"><img width=1024 src="Screenshot 2023-04-12 000817.png"></a>
+
 <a href="Screenshot 2023-04-15 204719.png?raw=true"><img width=1024 src="Screenshot 2023-04-15 204719.png"></a>
 ## Example:
 
@@ -13,5 +14,9 @@ add_child(node)
 ...
 
 node.voxel_line(Vector3(0, 0, 0), Vector3(0, 8, 16), 1.0, Color.CYAN)
+
+...
+
+node.voxel_circle(Vector3(0, 0, 0), 7.0, 1.0, Color.CYAN)
 
 ```
