@@ -98,7 +98,7 @@ func voxel_line(p_start : Vector3, p_end : Vector3, p_size : float, p_color : Co
 		var instance_count : int = multi_mesh.get_instance_count()
 		for i in range(instance_count):
 			var voxel_transform : Transform3D = Transform3D()
-			var origin : Vector3 = (p_start - get_global_transform().origin) + i * offset
+			var origin : Vector3 = (p_start - get_global_transform().origin) + float(i) * offset
 			voxel_transform.origin = round(origin * inv_size) * p_size
 			multi_mesh.set_instance_transform(i, voxel_transform)
 
@@ -111,18 +111,16 @@ func voxel_circle(p_center: Vector3, p_radius: float, p_size: float, p_color: Co
 	var step : int = ceili(circumference * inv_size) * 2
 	if (step <= 0): 
 		return
-	var angle_step = 2.0 * PI / float(step)
+	var angle_step : float = 2.0 * PI / float(step)
 	if (multi_mesh != null):
 		multi_mesh.set_instance_count(step)
 		multi_mesh.get_mesh().set_size(Vector3.ONE * p_size)
 		var instance_count : int = multi_mesh.get_instance_count()
 		for i in range(instance_count):
 			var voxel_transform : Transform3D = Transform3D()
-			var angle : float = float(i) * angle_step 
-			var x : float = cos(angle) * p_radius
-			var y : float = 0
-			var z : float = sin(angle) * p_radius
-			voxel_transform.origin = round(p_center + Vector3(x, y, z) * inv_size) * p_size
+			var angle : float = float(i) * angle_step
+			var origin : Vector3 = p_center + Vector3(cos(angle) * p_radius, 0, sin(angle) * p_radius)
+			voxel_transform.origin = round(origin * inv_size) * p_size
 			multi_mesh.set_instance_transform(i, voxel_transform)
 
 func _set_type(p_type : int = Type.LINE) -> void:
