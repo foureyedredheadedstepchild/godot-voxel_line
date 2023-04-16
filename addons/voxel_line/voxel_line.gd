@@ -7,6 +7,10 @@ var multi_mesh : MultiMesh
 #var mesh_instance : PackedScene = preload("voxel.tscn")
 var material : Resource = preload("voxel.material") as Material
 
+enum Type {
+	LINE = 0,
+	CIRCLE
+}
 
 @export_enum("Line", "Circle") var type: int = 0:
 	set(p_value):
@@ -25,7 +29,7 @@ var material : Resource = preload("voxel.material") as Material
 	get:
 		return points
 
-@export_range(0.1, 16.0, 0.1) var size : float = 1.0:
+@export_range(0.1, 64.0, 0.1) var size : float = 1.0:
 	set(p_value):
 		size = p_value
 		_update()
@@ -39,8 +43,8 @@ var material : Resource = preload("voxel.material") as Material
 		_update()
 	get:
 		return color
-		
-@export_range(0.2, 16.0, 0.1) var radius : float = 1.0:
+
+@export_range(0.1, 128.0, 0.1) var radius : float = 1.0:
 	set(p_value):
 		radius = p_value
 		_update()
@@ -63,7 +67,7 @@ func _update() -> void:
 				voxel_line(start, end, size, color)
 		else:
 			voxel_circle(origin, radius, size, color)
-	
+
 func set_multi_mesh(p_instance_count : int, p_size : float, p_color : Color) -> void:
 	if (multi_mesh != null):
 		return
@@ -77,10 +81,6 @@ func set_multi_mesh(p_instance_count : int, p_size : float, p_color : Color) -> 
 	mesh.set_material(material)
 	multi_mesh.set_mesh(mesh)
 	set_multimesh(multi_mesh)
-
-func circle_length(radius : float) -> float:
-	var length = 2.0 * PI * radius
-	return length
 
 func voxel_line(p_start : Vector3, p_end : Vector3, p_size : float, p_color : Color) -> void:
 	var direction : Vector3 = p_end - p_start
@@ -102,6 +102,9 @@ func voxel_line(p_start : Vector3, p_end : Vector3, p_size : float, p_color : Co
 			voxel_transform.origin = round(origin * inv_size) * p_size
 			multi_mesh.set_instance_transform(i, voxel_transform)
 
+func set_circumference(p_radius : float) -> float:
+	return 2.0 * PI * p_radius
+
 func voxel_circle(p_center: Vector3, p_radius: float, p_size: float, p_color: Color) -> void:
 	var circumference : float = 2.0 * PI * p_radius
 	var inv_size : float = 1.0 / p_size
@@ -113,7 +116,7 @@ func voxel_circle(p_center: Vector3, p_radius: float, p_size: float, p_color: Co
 		multi_mesh.set_instance_count(step)
 		multi_mesh.get_mesh().set_size(Vector3.ONE * p_size)
 		var instance_count : int = multi_mesh.get_instance_count()
-		for i in range(0, instance_count):
+		for i in range(instance_count):
 			var voxel_transform : Transform3D = Transform3D()
 			var angle : float = float(i) * angle_step 
 			var x : float = cos(angle) * p_radius
@@ -121,6 +124,9 @@ func voxel_circle(p_center: Vector3, p_radius: float, p_size: float, p_color: Co
 			var z : float = sin(angle) * p_radius
 			voxel_transform.origin = round(p_center + Vector3(x, y, z) * inv_size) * p_size
 			multi_mesh.set_instance_transform(i, voxel_transform)
+
+func _set_type(p_type : int = Type.LINE) -> void:
+	type = p_type
 
 func _set_color(p_color : Color) -> void:
 	if (multi_mesh != null):
